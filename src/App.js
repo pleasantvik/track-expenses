@@ -1,4 +1,6 @@
-import { ExpenseItem } from "./components/Expenses/ExpenseItem";
+import { Expenses } from "./components/Expenses/Expenses";
+import { ExpensesFilter } from "./components/NewExpense/ExpenseFilter";
+import { NewExpense } from "./components/NewExpense/NewExpense";
 const DUMMY_EXPENSES = [
   {
     id: "e1",
@@ -22,29 +24,15 @@ const DUMMY_EXPENSES = [
 ];
 
 const App = () => {
+  const addExpenseHandler = (expense) => {
+    console.log("App");
+    console.log(expense);
+  };
   return (
     <div>
-      <h1>Let's get started</h1>
-      <ExpenseItem
-        title={DUMMY_EXPENSES[0].title}
-        amount={DUMMY_EXPENSES[0].amount}
-        date={DUMMY_EXPENSES[0].date}
-      />
-      <ExpenseItem
-        title={DUMMY_EXPENSES[1].title}
-        amount={DUMMY_EXPENSES[1].amount}
-        date={DUMMY_EXPENSES[1].date}
-      />
-      <ExpenseItem
-        title={DUMMY_EXPENSES[2].title}
-        amount={DUMMY_EXPENSES[2].amount}
-        date={DUMMY_EXPENSES[2].date}
-      />
-      <ExpenseItem
-        title={DUMMY_EXPENSES[3].title}
-        amount={DUMMY_EXPENSES[3].amount}
-        date={DUMMY_EXPENSES[3].date}
-      />
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <ExpensesFilter />
+      <Expenses items={DUMMY_EXPENSES} />
     </div>
   );
 };
