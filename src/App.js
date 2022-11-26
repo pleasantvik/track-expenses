@@ -1,4 +1,7 @@
-import { ExpenseItem } from "./components/Expenses/ExpenseItem";
+import { useState } from "react";
+import { Expenses } from "./components/Expenses/Expenses";
+import { NewExpense } from "./components/NewExpense/NewExpense";
+
 const DUMMY_EXPENSES = [
   {
     id: "e1",
@@ -19,32 +22,24 @@ const DUMMY_EXPENSES = [
     amount: 450,
     date: new Date(2021, 5, 12),
   },
+  {
+    id: "e5",
+    title: "Laptop",
+    amount: 450,
+    date: new Date(2019, 5, 12),
+  },
 ];
 
 const App = () => {
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+
+  const addExpenseHandler = (expense) => {
+    setExpenses((prev) => [expense, ...prev]);
+  };
   return (
     <div>
-      <h1>Let's get started</h1>
-      <ExpenseItem
-        title={DUMMY_EXPENSES[0].title}
-        amount={DUMMY_EXPENSES[0].amount}
-        date={DUMMY_EXPENSES[0].date}
-      />
-      <ExpenseItem
-        title={DUMMY_EXPENSES[1].title}
-        amount={DUMMY_EXPENSES[1].amount}
-        date={DUMMY_EXPENSES[1].date}
-      />
-      <ExpenseItem
-        title={DUMMY_EXPENSES[2].title}
-        amount={DUMMY_EXPENSES[2].amount}
-        date={DUMMY_EXPENSES[2].date}
-      />
-      <ExpenseItem
-        title={DUMMY_EXPENSES[3].title}
-        amount={DUMMY_EXPENSES[3].amount}
-        date={DUMMY_EXPENSES[3].date}
-      />
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses items={expenses} />
     </div>
   );
 };
